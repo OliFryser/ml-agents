@@ -326,7 +326,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 8
+    VectorObservationSize: 9
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 2
@@ -335,7 +335,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: 41a422b945d57c348bebbdf8b3e73ce0, type: 3}
+  m_Model: {fileID: 5022602860645237092, guid: 6fec0c686b79ef94ab2e30580a6779d6, type: 3}
   m_InferenceDevice: 2
   m_BehaviorType: 0
   m_BehaviorName: 3DBall

@@ -14,6 +14,8 @@ public class Ball3DAgent : Agent
     Rigidbody m_BallRb;
     EnvironmentParameters m_ResetParams;
 
+    float time;
+
     public override void Initialize()
     {
         m_BallRb = ball.GetComponent<Rigidbody>();
@@ -29,6 +31,7 @@ public class Ball3DAgent : Agent
             sensor.AddObservation(gameObject.transform.rotation.x);
             sensor.AddObservation(ball.transform.position - gameObject.transform.position);
             sensor.AddObservation(m_BallRb.linearVelocity);
+            sensor.AddObservation(time % 400f);
         }
     }
 
@@ -42,12 +45,12 @@ public class Ball3DAgent : Agent
         {
             gameObject.transform.Rotate(new Vector3(0, 0, 1), actionZ);
         }
-
         if ((gameObject.transform.rotation.x < 0.25f && actionX > 0f) ||
             (gameObject.transform.rotation.x > -0.25f && actionX < 0f))
         {
             gameObject.transform.Rotate(new Vector3(1, 0, 0), actionX);
         }
+
         if ((ball.transform.position.y - gameObject.transform.position.y) < -2f ||
             Mathf.Abs(ball.transform.position.x - gameObject.transform.position.x) > 3f ||
             Mathf.Abs(ball.transform.position.z - gameObject.transform.position.z) > 3f)
@@ -57,7 +60,16 @@ public class Ball3DAgent : Agent
         }
         else
         {
-            SetReward(0.1f);
+            time++;
+            float cubeWidth = 3;
+            Vector2 offset = new Vector2(cubeWidth * .5f, cubeWidth * .5f);
+            var t = time % 400;
+            if (t > 200f)
+                offset *= -1;
+
+            float dx = ball.transform.position.x - transform.position.x + offset.x;
+            float dz = ball.transform.position.z - transform.position.z + offset.y;
+            SetReward(Mathf.Exp(-(dx * dx + dz * dz)));
         }
     }
 
@@ -91,5 +103,6 @@ public class Ball3DAgent : Agent
     public void SetResetParameters()
     {
         SetBall();
+        time = 0;
     }
 }

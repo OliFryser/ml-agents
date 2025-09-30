@@ -34,7 +34,7 @@ f. To find a good learning rate, I would basically go by trial and error, until 
 
 ## Reward Shaping
 
-a. Reward functions
+The clips from all of these functions are found in the same folder as this markdown file.
 
 ### Centered
 
@@ -68,4 +68,4 @@ if (t > 200f)
 float dx = ball.transform.position.x - transform.position.x + offset.x;
 float dz = ball.transform.position.z - transform.position.z + offset.y;
 SetReward(Mathf.Exp(-(dx * dx + dz * dz)));
-            ```
+```
